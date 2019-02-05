@@ -16,6 +16,7 @@ from minion.subprocess.remove_group import RemoveGroupCommand
 from minion.subprocess.lrc_recover import LrcRecoverSubprocess
 from minion.subprocess.lrc_remove import LrcRemoveSubprocess
 from minion.subprocess.move_path import MovePathCommand
+from minion.subprocess.move_elliptics_data import MoveEllipticsDataCommand
 from minion.subprocess.lock_backend import LockBackendCommand
 from minion.subprocess.create_file_marker import CreateFileMarkerCommand
 from minion.subprocess.unlock_backend import UnlockBackendCommand
@@ -45,6 +46,7 @@ __all__ = (
     CreateGroupCommand,
     RemoveGroupCommand,
     MovePathCommand,
+    MoveEllipticsDataCommand,
     LockBackendCommand,
     CreateFileMarkerCommand,
     UnlockBackendCommand,

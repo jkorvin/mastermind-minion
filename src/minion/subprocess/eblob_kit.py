@@ -15,6 +15,7 @@ where:
 
 """
 import json
+from collections import defaultdict
 
 from minion.logger import cmd_logger
 from minion.subprocess.base_shell import BaseSubprocess
@@ -91,8 +92,26 @@ class EblobKitSubprocess(BaseSubprocess):
                 cmd_logger.info('Collecting artifacts from: {}'.format(file_name), extra=self.log_extra)
 
                 with open(file_name, 'rb') as f:
-                    result[ResultFields.OUTPUT] = json.load(f)
-                    return result
+                    artifacts_data = json.load(f)
+
+                artifacts = defaultdict(int)
+
+                for filename, stats in artifacts_data.get('files', {}).iteritems():
+                    artifacts['checked_files'] += 1
+
+                    changed = False
+                    for stat, stat_value in stats.iteritems():
+                        if isinstance(stat_value, int) and stat_value > 0:
+                            artifacts[stat] += stat_value
+                            changed = True
+                        elif isinstance(stat_value, bool) and stat_value is True:
+                            artifacts[stat] += 1
+
+                    if changed:
+                        artifacts['changed_files'] += 1
+
+                result[ResultFields.OUTPUT] = artifacts
+                return result
 
             except Exception as e:
                 cmd_logger.error(

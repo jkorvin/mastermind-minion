@@ -1,3 +1,9 @@
+mastermind-minion (1.45) xenial; urgency=medium
+
+  * Add mds_gc command
+
+ -- Evgeny Avramenko <kanst9@yandex-team.ru>  Tue, 12 Mar 2019 16:12:09 +0300
+
 mastermind-minion (1.44) xenial; urgency=medium
 
   * Change artifacts for eblob_kit

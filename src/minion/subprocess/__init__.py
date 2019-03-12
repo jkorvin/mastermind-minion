@@ -25,6 +25,7 @@ from minion.subprocess.check_file_system import CheckFileSystemCommand
 from minion.subprocess.ping import PingCommand
 from minion.subprocess.check_group_location import CheckGroupLocation
 from minion.subprocess.eblob_kit import EblobKitSubprocess
+from minion.subprocess.mds_gc import MdsGcSubprocess
 
 __all__ = (
     RsyncSubprocess,
@@ -39,6 +40,7 @@ __all__ = (
     LrcRecoverSubprocess,
     LrcRemoveSubprocess,
     EblobKitSubprocess,
+    MdsGcSubprocess,
 
     CreateGroupFileCommand,
     RemovePathCommand,

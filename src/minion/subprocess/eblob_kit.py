@@ -53,11 +53,11 @@ class EblobKitSubprocess(BaseSubprocess):
             cmd.extend(['--log-file', self.params[LOG_PARAM]])
 
         subcommand = self.params[ResultFields.SUB_CMD]
-        if subcommand == 'fix':
+        if subcommand in ['fix', 'fix_blob']:
             self._check_fix_params()
 
             cmd.extend([
-                'fix',
+                subcommand,
                 self.params['path'],
                 '--destination',
                 self.params['destination'],

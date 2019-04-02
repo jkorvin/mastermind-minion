@@ -1,3 +1,9 @@
+mastermind-minion (1.46) xenial; urgency=medium
+
+  * Eblob_kit: add fix_blob subcommand
+
+ -- Evgeny Avramenko <kanst9@yandex-team.ru>  Tue, 02 Apr 2019 15:29:28 +0300
+
 mastermind-minion (1.45) xenial; urgency=medium
 
   * Add mds_gc command

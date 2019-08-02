@@ -4,6 +4,7 @@ import traceback
 
 from opster import command
 import tornado.ioloop
+from tornado.ioloop import IOLoop, PeriodicCallback
 
 from minion.app import app
 from minion.config import config
@@ -50,8 +51,17 @@ def setup():
 
 def run():
     logger.info('Starting event loop...')
+
+    IOLoop.current().run_sync(manager.update_broken_commands)
+    # Default is 12 hours.
+    callback_time = config.get('common', {}).get('period_of_check_broken_command_sec', 43200) * 1000
+    periodic_update_broken_command = PeriodicCallback(
+        callback=manager.update_broken_commands,
+        callback_time=callback_time,
+    )
+    periodic_update_broken_command.start()
+
     app.listen(int(config['common']['port']))
-    manager.update_broken_commands()
 
     setup()
 

@@ -31,7 +31,9 @@ class SubprocessManager(object):
             return False
         return True
 
+    @gen.coroutine
     def update_broken_commands(self):
+        logger.info('Updating previously broken command: starting')
         s = Session()
         s.begin()
         try:
@@ -63,6 +65,8 @@ class SubprocessManager(object):
             logger.exception('Failed to update broken commands')
             s.rollback()
             raise
+        finally:
+            logger.info('Updating previously broken command: finished')
 
     def get_subprocess(self, cmd, params):
         Subprocess = subprocess_factory(cmd)
